@@ -60,12 +60,16 @@ public class PointsCalculator {
 
     private double getTierMultiplier(String tier) {
         if (tier == null) return 0.0;
-        return switch (tier.toUpperCase()) {
-            case "SILVER" -> 0.15;
-            case "GOLD" -> 0.30;
-            case "PLATINUM" -> 0.50;
-            default -> 0.0;
-        };
+        switch (tier.toUpperCase()) {
+            case "SILVER":
+                return 0.15;
+            case "GOLD":
+                return 0.30;
+            case "PLATINUM":
+                return 0.50;
+            default:
+                return 0.0;
+        }
     }
 }
 

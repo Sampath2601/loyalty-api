@@ -17,7 +17,7 @@ public class PromoServiceImpl implements PromoService {
 
         warnings.clear();
 
-        if (code == null) return Future.succeededFuture(0.0);
+        if (code == null ) return Future.succeededFuture(0.0);
 
         if (code.equals("SUMMER25")) {
             warnings.add("PROMO_EXPIRES_SOON");
