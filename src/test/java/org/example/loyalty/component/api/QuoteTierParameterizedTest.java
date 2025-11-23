@@ -4,14 +4,14 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.client.HttpResponse;
 import org.assertj.core.api.Assertions;
-import org.example.loyalty.component.base.TestBase;
+import org.example.loyalty.component.base.ComponentTestBase;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class QuoteTierParameterizedTest extends TestBase {
+public class QuoteTierParameterizedTest extends ComponentTestBase {
 
     @ParameterizedTest
     @MethodSource("tierDataProvider")
@@ -24,7 +24,7 @@ public class QuoteTierParameterizedTest extends TestBase {
                 .put("customerTier", tier)
                 .put("promoCode", "NONE");
 
-        HttpResponse<Buffer> resp = helper.executeQuote(req);
+        HttpResponse<Buffer> resp = http.postJson("/v1/points/quote", req);
 
         Assertions.assertThat(resp.statusCode()).isEqualTo(200);
 
