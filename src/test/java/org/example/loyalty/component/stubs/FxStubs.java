@@ -1,7 +1,5 @@
 package org.example.loyalty.component.stubs;
 
-import com.github.tomakehurst.wiremock.stubbing.Scenario;
-
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
 public class FxStubs {
