@@ -91,8 +91,3 @@ curl -X POST http://localhost:<port>/v1/points/quote \
 - Logs key events, errors, retries, and warnings.
 - Helps debug points calculations and external service calls.
 
----
-
-## License
-
-MIT License
