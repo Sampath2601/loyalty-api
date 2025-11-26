@@ -33,4 +33,3 @@ public class FareRequest {
     public String getPromoCode() { return promoCode; }
     public void setPromoCode(String promoCode) { this.promoCode = promoCode; }
 }
-

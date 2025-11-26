@@ -1,4 +1,5 @@
 package org.example.loyalty.model;
+
 import java.util.List;
 
 public class PointsResponse {
@@ -10,8 +11,10 @@ public class PointsResponse {
     private double effectiveFxRate;
     private List<String> warnings;
 
+    // Default constructor
     public PointsResponse() {}
 
+    // Constructor with all fields
     public PointsResponse(long basePoints, double tierBonus, double promoBonus, double totalPoints, double effectiveFxRate, List<String> warnings) {
         this.basePoints = basePoints;
         this.tierBonus = tierBonus;
@@ -21,6 +24,7 @@ public class PointsResponse {
         this.warnings = warnings;
     }
 
+    // Getters and setters
     public long getBasePoints() { return basePoints; }
     public void setBasePoints(long basePoints) { this.basePoints = basePoints; }
 
@@ -39,4 +43,3 @@ public class PointsResponse {
     public List<String> getWarnings() { return warnings; }
     public void setWarnings(List<String> warnings) { this.warnings = warnings; }
 }
-

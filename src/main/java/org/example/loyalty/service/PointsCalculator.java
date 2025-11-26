@@ -1,16 +1,15 @@
 package org.example.loyalty.service;
 
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonObject;
-
-
-import io.vertx.core.Future;
 import org.example.loyalty.model.FareRequest;
 import org.example.loyalty.model.PointsResponse;
 
-
 import java.util.Collections;
 
+/**
+ * PointsCalculator computes loyalty points for a fare request,
+ * applying FX conversion, tier multipliers, promo bonuses, and points cap.
+ */
 public class PointsCalculator {
 
     private final FxService fxService;
@@ -22,6 +21,10 @@ public class PointsCalculator {
         this.promoService = promoService;
     }
 
+    /**
+     * Calculates points for a fare request asynchronously.
+     * Validates input, fetches FX rate, applies tier multiplier and promo bonus, and caps points.
+     */
     public Future<PointsResponse> calculate(FareRequest request) {
         if (request.getFareAmount() <= 0) {
             return Future.failedFuture(new IllegalArgumentException("Invalid fareAmount"));
@@ -35,6 +38,7 @@ public class PointsCalculator {
             return Future.failedFuture(new IllegalArgumentException("Invalid cabinClass"));
         }
 
+        // Fetch FX rate and calculate points
         return fxService.getRate(request.getCurrency())
                 .compose(fxRate -> {
                     long basePoints = Math.round(request.getFareAmount() * fxRate);
@@ -58,14 +62,20 @@ public class PointsCalculator {
                 });
     }
 
+    /**
+     * Returns tier multiplier based on customer tier.
+     */
     private double getTierMultiplier(String tier) {
         if (tier == null) return 0.0;
-        return switch (tier.toUpperCase()) {
-            case "SILVER" -> 0.15;
-            case "GOLD" -> 0.30;
-            case "PLATINUM" -> 0.50;
-            default -> 0.0;
-        };
+        switch (tier.toUpperCase()) {
+            case "SILVER":
+                return 0.15;
+            case "GOLD":
+                return 0.30;
+            case "PLATINUM":
+                return 0.50;
+            default:
+                return 0.0;
+        }
     }
 }
-
